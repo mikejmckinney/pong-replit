@@ -2,51 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* LIGHT MODE */
+/* SYNTHWAVE DARK MODE - This game is always dark */
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
-  --opaque-button-border-intensity: -8;
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
-  --background: 0 0% 100%;
-  --foreground: 0 0% 5%;
-  --border: 0 0% 92%;
-  --card: 0 0% 98%;
-  --card-foreground: 0 0% 5%;
-  --card-border: 0 0% 94%;
-  --sidebar: 0 0% 96%;
-  --sidebar-foreground: 0 0% 8%;
-  --sidebar-border: 0 0% 90%;
-  --sidebar-primary: 316 85% 45%;
-  --sidebar-primary-foreground: 316 15% 98%;
-  --sidebar-accent: 316 12% 88%;
-  --sidebar-accent-foreground: 316 8% 15%;
-  --sidebar-ring: 316 65% 55%;
-  --popover: 0 0% 94%;
-  --popover-foreground: 0 0% 8%;
-  --popover-border: 0 0% 88%;
-  --primary: 316 85% 35%;
-  --primary-foreground: 316 15% 98%;
-  --secondary: 316 6% 86%;
-  --secondary-foreground: 316 6% 12%;
-  --muted: 316 8% 90%;
-  --muted-foreground: 316 5% 25%;
-  --accent: 190 90% 45%;
-  --accent-foreground: 190 8% 8%;
-  --destructive: 0 84% 38%;
-  --destructive-foreground: 0 15% 98%;
-  --input: 0 0% 75%;
-  --ring: 316 85% 45%;
-  --chart-1: 316 85% 35%;
-  --chart-2: 190 90% 35%;
-  --chart-3: 280 75% 40%;
-  --chart-4: 340 80% 38%;
-  --chart-5: 200 85% 35%;
-  --font-sans: Open Sans, sans-serif;
+  --button-outline: rgba(255,255,255, .15);
+  --badge-outline: rgba(255,255,255, .08);
+  --opaque-button-border-intensity: 12;
+  --elevate-1: rgba(255,255,255, .06);
+  --elevate-2: rgba(255,255,255, .12);
+  --background: 250 30% 5%;
+  --foreground: 180 100% 95%;
+  --border: 280 50% 20%;
+  --card: 250 30% 8%;
+  --card-foreground: 180 100% 95%;
+  --card-border: 280 60% 25%;
+  --sidebar: 250 30% 7%;
+  --sidebar-foreground: 180 100% 92%;
+  --sidebar-border: 280 50% 18%;
+  --sidebar-primary: 320 100% 60%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 280 80% 25%;
+  --sidebar-accent-foreground: 180 100% 95%;
+  --sidebar-ring: 320 100% 60%;
+  --popover: 250 30% 10%;
+  --popover-foreground: 180 100% 92%;
+  --popover-border: 280 60% 22%;
+  --primary: 320 100% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 280 80% 20%;
+  --secondary-foreground: 180 100% 95%;
+  --muted: 250 25% 15%;
+  --muted-foreground: 250 20% 60%;
+  --accent: 180 100% 50%;
+  --accent-foreground: 250 30% 5%;
+  --destructive: 0 85% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 280 40% 25%;
+  --ring: 320 100% 60%;
+  --chart-1: 320 100% 60%;
+  --chart-2: 180 100% 50%;
+  --chart-3: 280 100% 65%;
+  --chart-4: 45 100% 55%;
+  --chart-5: 200 100% 55%;
+  --font-sans: "Press Start 2P", monospace;
   --font-serif: Georgia, serif;
-  --font-mono: Menlo, monospace;
-  --radius: .5rem;
+  --font-mono: "Press Start 2P", monospace;
+  --radius: .375rem;
+  
+  --neon-magenta: 320 100% 60%;
+  --neon-cyan: 180 100% 50%;
+  --neon-purple: 280 100% 65%;
+  --neon-yellow: 45 100% 55%;
   --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
@@ -87,46 +92,47 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
+/* Dark class uses same colors - game is always in dark/synthwave mode */
 .dark {
-  --button-outline: rgba(255,255,255, .10);
-  --badge-outline: rgba(255,255,255, .05);
-  --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
-  --background: 240 5% 6%;
-  --foreground: 240 3% 96%;
-  --border: 240 4% 14%;
-  --card: 240 5% 8%;
-  --card-foreground: 240 3% 96%;
-  --card-border: 240 4% 11%;
-  --sidebar: 240 5% 10%;
-  --sidebar-foreground: 240 3% 92%;
-  --sidebar-border: 240 4% 14%;
-  --sidebar-primary: 316 85% 45%;
-  --sidebar-primary-foreground: 316 10% 98%;
-  --sidebar-accent: 316 10% 15%;
-  --sidebar-accent-foreground: 316 5% 92%;
-  --sidebar-ring: 316 65% 55%;
-  --popover: 240 5% 13%;
-  --popover-foreground: 240 3% 92%;
-  --popover-border: 240 4% 17%;
-  --primary: 316 85% 35%;
-  --primary-foreground: 316 10% 98%;
-  --secondary: 240 8% 18%;
-  --secondary-foreground: 240 4% 92%;
-  --muted: 240 8% 16%;
-  --muted-foreground: 240 4% 75%;
-  --accent: 190 90% 45%;
-  --accent-foreground: 190 5% 98%;
-  --destructive: 0 84% 32%;
-  --destructive-foreground: 0 10% 98%;
-  --input: 240 4% 30%;
-  --ring: 316 65% 55%;
-  --chart-1: 316 85% 65%;
-  --chart-2: 190 90% 65%;
-  --chart-3: 280 75% 70%;
-  --chart-4: 340 80% 68%;
-  --chart-5: 200 85% 65%;
+  --button-outline: rgba(255,255,255, .15);
+  --badge-outline: rgba(255,255,255, .08);
+  --opaque-button-border-intensity: 12;
+  --elevate-1: rgba(255,255,255, .06);
+  --elevate-2: rgba(255,255,255, .12);
+  --background: 250 30% 5%;
+  --foreground: 180 100% 95%;
+  --border: 280 50% 20%;
+  --card: 250 30% 8%;
+  --card-foreground: 180 100% 95%;
+  --card-border: 280 60% 25%;
+  --sidebar: 250 30% 7%;
+  --sidebar-foreground: 180 100% 92%;
+  --sidebar-border: 280 50% 18%;
+  --sidebar-primary: 320 100% 60%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 280 80% 25%;
+  --sidebar-accent-foreground: 180 100% 95%;
+  --sidebar-ring: 320 100% 60%;
+  --popover: 250 30% 10%;
+  --popover-foreground: 180 100% 92%;
+  --popover-border: 280 60% 22%;
+  --primary: 320 100% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 280 80% 20%;
+  --secondary-foreground: 180 100% 95%;
+  --muted: 250 25% 15%;
+  --muted-foreground: 250 20% 60%;
+  --accent: 180 100% 50%;
+  --accent-foreground: 250 30% 5%;
+  --destructive: 0 85% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 280 40% 25%;
+  --ring: 320 100% 60%;
+  --chart-1: 320 100% 60%;
+  --chart-2: 180 100% 50%;
+  --chart-3: 280 100% 65%;
+  --chart-4: 45 100% 55%;
+  --chart-5: 200 100% 55%;
   --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
@@ -135,6 +141,11 @@
   --shadow-lg: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 4px 6px -1px hsl(0 0% 0% / 0.00);
   --shadow-xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 8px 10px -1px hsl(0 0% 0% / 0.00);
   --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
+  
+  --neon-magenta: 320 100% 60%;
+  --neon-cyan: 180 100% 50%;
+  --neon-purple: 280 100% 65%;
+  --neon-yellow: 45 100% 55%;
 
 /* Fallback for older browsers */
   --sidebar-primary-border: hsl(var(--sidebar-primary));
@@ -170,8 +181,41 @@
     @apply border-border;
   }
 
-  body {
+  html, body {
     @apply font-sans antialiased bg-background text-foreground;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  body {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px currentColor);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px currentColor);
   }
 }
 
