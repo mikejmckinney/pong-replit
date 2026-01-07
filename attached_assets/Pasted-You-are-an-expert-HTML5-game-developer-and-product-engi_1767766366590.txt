@@ -1,0 +1,70 @@
+You are an expert HTML5 game developer and product engineer. Build a **web-based Pong game optimized for mobile devices** with a **retro arcade aesthetic**. Deliver a complete, runnable project (no external build tools required unless clearly justified).
+
+## Core requirements
+- **Mobile-first**: touch-friendly controls designed for one-handed and two-handed play.
+- **Classic Pong mechanics**:
+  - Two paddles, one ball, collisions + bounce angles, scoring, win condition.
+  - Increasing difficulty options (ball speed ramp, paddle size options, etc.).
+- **Responsive design**:
+  - Works cleanly on iPhone/Android, tablets, and desktop.
+  - Maintains correct aspect ratio and playfield scaling; avoids accidental page scroll/zoom while playing.
+
+## UI / Style
+- Retro arcade vibe with:
+  - **Synthwave color palette** (e.g., neon magenta/cyan/purple on dark background).
+  - Optional CRT/glow effects that don’t kill performance on mobile.
+  - Pixel/arcade-inspired typography (use a safe fallback if custom fonts aren’t available).
+- **Retro sound effects**:
+  - Paddle hit, wall hit, score, power-up pickup, menu navigation.
+  - Use Web Audio API or lightweight audio assets; include a “mute” toggle and respect mobile autoplay restrictions (sound starts after user interaction).
+
+## Controls (touch-first)
+Implement at least two control schemes (user-selectable):
+1) **Drag paddle**: touch/drag along the left/right side to move your paddle.
+2) **Tap zones**: tap upper/lower zones to move up/down.
+Also support keyboard on desktop (W/S and Up/Down) and optional gamepad if easy.
+
+## Game modes & features
+### Multiplayer
+- **Local multiplayer** (same device):
+  - Split control areas so two players can play on one screen (left player controls left paddle; right player controls right paddle).
+- **Online multiplayer**:
+  - Implement real-time head-to-head using WebSockets (recommended: Node.js + ws) or WebRTC if preferred.
+  - Include matchmaking (simple “create room / join room with code”), reconnection handling, and basic latency smoothing/prediction to keep play fair.
+  - Provide clear architecture notes: client/server responsibilities, authoritative state, anti-cheat considerations.
+
+### Power-ups and special modes
+- Add a power-up system with spawn logic, rarity, duration, and visual indicators.
+  - Examples: paddle grow/shrink, multi-ball, slow-mo, curve shot, temporary shield, speed boost.
+- Include **special game modes** (selectable from menu):
+  - “Classic”
+  - “Arcade” (power-ups enabled)
+  - “Time Attack” (most points in X seconds)
+  - “Chaos” (multi-ball + faster ramps)
+  - Add at least one more creative mode.
+
+### Leaderboard system
+- Create a leaderboard with:
+  - Global leaderboard for Arcade and Classic (separate boards).
+  - Local “device leaderboard” stored in localStorage as fallback.
+  - Server-backed persistence (SQLite/Postgres ok) with basic rate limiting and validation.
+  - Anti-cheat measures: server verifies plausible score/time, requires match replay token or server-authoritative scoring.
+- UI for leaderboard: top 50, player name entry, filtering by mode, and “my rank”.
+
+## Deliverables
+1) **Project structure**:
+   - /client (HTML/CSS/JS) and /server (Node.js) OR a clearly justified alternative.
+2) **Run instructions**:
+   - One-liner commands to start server and open the client.
+3) **Code quality**:
+   - Clean, commented code, modular architecture.
+   - Performance optimized for mobile (60fps target), avoid heavy effects.
+4) **Assets**:
+   - Include minimal sound assets or generate sounds programmatically.
+   - Provide placeholders if needed but make the project runnable.
+5) **Testing/QA checklist**:
+   - Touch input reliability, orientation changes, resizing, audio behavior, multiplayer sync, leaderboard integrity.
+
+## Output format
+- Provide the full code for all files (with filenames), plus setup instructions.
+- If the code is lengthy, provide a repo-like file tree and then each file in separate code blocks.
