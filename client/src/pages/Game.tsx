@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useAudio } from "@/hooks/useAudio";
 import { useGameEngine } from "@/hooks/useGameEngine";
 import { GameCanvas } from "@/components/game/GameCanvas";
@@ -184,14 +184,17 @@ export default function Game() {
     saveLocalScore(playerName, score, mode);
   }, []);
 
+  const gameControlsRef = useRef({ resetGame, startGame, stopGame });
+  gameControlsRef.current = { resetGame, startGame, stopGame };
+
   useEffect(() => {
     if (screen === "game" && gameStarted) {
-      resetGame();
-      startGame();
+      gameControlsRef.current.resetGame();
+      gameControlsRef.current.startGame();
     } else {
-      stopGame();
+      gameControlsRef.current.stopGame();
     }
-  }, [screen, gameStarted, selectedMode, resetGame, startGame, stopGame]);
+  }, [screen, gameStarted, selectedMode]);
 
   const navigateToScreen = (newScreen: Screen) => {
     setPrevScreen(screen);
