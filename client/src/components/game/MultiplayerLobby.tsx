@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Copy, Users, Loader2, Wifi, WifiOff } from "lucide-react";
 import type { GameMode, GameRoom, WSMessage } from "@shared/schema";
+import { getWsUrl } from "@/lib/config";
 
 interface MultiplayerLobbyProps {
   onBack: () => void;
@@ -34,8 +35,8 @@ export function MultiplayerLobby({ onBack, onGameStart, onNavigate }: Multiplaye
   }, []);
 
   const connectWebSocket = () => {
-    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-    const ws = new WebSocket(`${protocol}//${window.location.host}/ws`);
+    const wsUrl = getWsUrl('/ws');
+    const ws = new WebSocket(wsUrl);
     
     ws.onopen = () => {
       setConnected(true);

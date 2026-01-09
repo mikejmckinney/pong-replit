@@ -84,12 +84,37 @@ The game engine (`useGameEngine.ts`) implements:
 
 ## Deployment Options
 
-### Vercel (Frontend Only)
-Deploy the game frontend to Vercel for single-player functionality. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for complete instructions.
+### Vercel + Render (Recommended for Production)
+Deploy frontend and backend separately for best performance and full functionality.
 
-**Quick deploy:** The repository includes `vercel.json` configuration. Simply import the repository to Vercel and it will automatically build and deploy.
+**Frontend (Vercel):**
+- Deploy static frontend to Vercel's global CDN
+- See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for setup
+- Free tier available with excellent performance
 
-**Note:** Multiplayer features require a backend server and won't work on Vercel's static hosting. Single-player modes, AI opponents, and local leaderboard will work perfectly.
+**Backend (Render):**
+- Deploy Node.js backend to Render for API and WebSocket support
+- See [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for complete setup
+- Includes CORS configuration for Vercel frontend
+- Free tier available (with cold starts)
+- Supports multiplayer and server-side leaderboard
+
+**Benefits:**
+- ✅ All features work (multiplayer, leaderboard, single-player)
+- ✅ Fast edge-delivered frontend via Vercel CDN
+- ✅ WebSocket support for real-time multiplayer
+- ✅ Optional PostgreSQL database on Render
+- ✅ Free tiers available on both platforms
+
+### Vercel Only (Frontend Only)
+Deploy just the frontend to Vercel for single-player functionality. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for instructions.
+
+**Limitations:**
+- ❌ No multiplayer (requires WebSocket server)
+- ❌ No server-side leaderboard (uses localStorage only)
+- ✅ All single-player modes work perfectly
 
 ### Replit (Full-Stack)
-For complete functionality including multiplayer and server leaderboard, deploy to Replit. The `.replit` configuration file is already set up for autoscale deployment.
+Deploy everything to Replit for quick setup. The `.replit` configuration file is already set up for autoscale deployment.
+
+**Note:** Replit is great for development but Vercel + Render provides better production performance.

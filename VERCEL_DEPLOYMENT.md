@@ -2,9 +2,15 @@
 
 ## Overview
 
-This guide explains how to deploy the Neon Pong frontend to Vercel. The game will work in single-player mode with local leaderboard storage. **Note: Multiplayer features require a backend server and will not work in frontend-only Vercel deployments.**
+This guide explains how to deploy the Neon Pong frontend to Vercel. 
 
-## Quick Deploy
+**Deployment Options:**
+1. **Frontend only** (this guide) - Single-player mode with local storage
+2. **Frontend + Backend** - Full functionality including multiplayer and server leaderboard
+   - Deploy frontend to Vercel (this guide)
+   - Deploy backend to Render (see [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md))
+
+## Quick Deploy (Frontend Only)
 
 ### Option 1: Using Vercel Dashboard
 
@@ -26,6 +32,42 @@ vercel
 # For production deployment
 vercel --prod
 ```
+
+## Full-Stack Deployment (Frontend + Backend)
+
+To enable multiplayer and server-side leaderboard:
+
+### Step 1: Deploy Backend to Render
+
+Follow the [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) guide to deploy the backend. You'll get a URL like:
+```
+https://neon-pong-backend.onrender.com
+```
+
+### Step 2: Configure Vercel with Backend URL
+
+1. **In Vercel Dashboard**
+   - Go to your project → "Settings" → "Environment Variables"
+   - Add the following variables:
+
+   | Name | Value | Example |
+   |------|-------|---------|
+   | `VITE_API_URL` | Your Render backend URL | `https://neon-pong-backend.onrender.com` |
+   | `VITE_WS_URL` | Your Render WebSocket URL | `wss://neon-pong-backend.onrender.com` |
+
+2. **Redeploy**
+   - Go to "Deployments" tab
+   - Click "..." on latest deployment → "Redeploy"
+   - Or push a new commit to trigger auto-deploy
+
+### Step 3: Configure Render CORS
+
+In your Render backend service, set the `ALLOWED_ORIGINS` environment variable:
+```
+ALLOWED_ORIGINS=https://your-vercel-app.vercel.app
+```
+
+Replace with your actual Vercel deployment URL.
 
 ## Configuration
 
