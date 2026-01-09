@@ -65,12 +65,14 @@ export class MemStorage implements IStorage {
 
   async verifyPassword(username: string, password: string): Promise<User | null> {
     const user = await this.getUserByUsername(username);
-    if (!user) {
-      return null;
-    }
     
-    const isValid = await bcrypt.compare(password, user.passwordHash);
-    return isValid ? user : null;
+    // Always perform bcrypt comparison to prevent timing attacks
+    // Use a dummy hash when user doesn't exist to ensure consistent timing
+    const hashToCompare = user?.passwordHash || '$2b$10$dummyhashtopreventtimingattacksxxxxxxxxxxxxxxxxxxxxxxxxx';
+    const isValid = await bcrypt.compare(password, hashToCompare);
+    
+    // Only return user if they exist AND password is valid
+    return (user && isValid) ? user : null;
   }
 
   async getLeaderboard(mode?: GameMode, limit: number = 50): Promise<LeaderboardEntry[]> {
