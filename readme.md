@@ -81,3 +81,15 @@ The game engine (`useGameEngine.ts`) implements:
 - `esbuild`: Server bundling for production
 - `vite`: Frontend bundling with React plugin
 - Replit-specific plugins for development tooling
+
+## Deployment Options
+
+### Vercel (Frontend Only)
+Deploy the game frontend to Vercel for single-player functionality. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for complete instructions.
+
+**Quick deploy:** The repository includes `vercel.json` configuration. Simply import the repository to Vercel and it will automatically build and deploy.
+
+**Note:** Multiplayer features require a backend server and won't work on Vercel's static hosting. Single-player modes, AI opponents, and local leaderboard will work perfectly.
+
+### Replit (Full-Stack)
+For complete functionality including multiplayer and server leaderboard, deploy to Replit. The `.replit` configuration file is already set up for autoscale deployment.
