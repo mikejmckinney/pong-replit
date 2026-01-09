@@ -1,10 +1,14 @@
 import type { User, InsertUser, LeaderboardEntry, InsertLeaderboardEntry, GameRoom, GameMode } from "@shared/schema";
 import { randomUUID } from "crypto";
+import bcrypt from "bcrypt";
+
+const SALT_ROUNDS = 10;
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  verifyPassword(username: string, password: string): Promise<User | null>;
   
   getLeaderboard(mode?: GameMode, limit?: number): Promise<LeaderboardEntry[]>;
   addLeaderboardEntry(entry: InsertLeaderboardEntry): Promise<LeaderboardEntry>;
@@ -48,9 +52,27 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
+    // Hash the password before storing
+    const passwordHash = await bcrypt.hash(insertUser.password, SALT_ROUNDS);
+    const user: User = { 
+      id, 
+      username: insertUser.username, 
+      passwordHash 
+    };
     this.users.set(id, user);
     return user;
+  }
+
+  async verifyPassword(username: string, password: string): Promise<User | null> {
+    const user = await this.getUserByUsername(username);
+    
+    // Always perform bcrypt comparison to prevent timing attacks
+    // Use a dummy hash when user doesn't exist to ensure consistent timing
+    const hashToCompare = user?.passwordHash || '$2b$10$dummyhashtopreventtimingattacksxxxxxxxxxxxxxxxxxxxxxxxxx';
+    const isValid = await bcrypt.compare(password, hashToCompare);
+    
+    // Only return user if they exist AND password is valid
+    return (user && isValid) ? user : null;
   }
 
   async getLeaderboard(mode?: GameMode, limit: number = 50): Promise<LeaderboardEntry[]> {
