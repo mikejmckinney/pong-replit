@@ -59,7 +59,7 @@ pong-replit/
 │   └── build.ts         # Production build orchestration (Vite + esbuild)
 ├── attached_assets/     # Additional static assets
 ├── package.json         # Dependencies + npm scripts
-├── tsconfig.json        # TypeScript config (path aliases: @, @shared, @assets)
+├── tsconfig.json        # TypeScript config (path aliases: @, @shared)
 ├── vite.config.ts       # Vite config (root: ./client, output: dist/public)
 ├── tailwind.config.ts   # Tailwind theme (retro colors, Press Start 2P font)
 ├── drizzle.config.ts    # Drizzle ORM config (PostgreSQL, optional)
