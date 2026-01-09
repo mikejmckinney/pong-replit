@@ -20,16 +20,18 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   
-  // Handle preflight requests for all origins (required for CORS)
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
-    // Only set CORS headers if origin is explicitly allowed
+    // Only allow preflight if origin is explicitly allowed
     if (origin && allowedOrigins.includes(origin)) {
       res.setHeader('Access-Control-Allow-Origin', origin);
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
       res.setHeader('Access-Control-Allow-Credentials', 'true');
+      return res.sendStatus(200);
     }
-    return res.sendStatus(200);
+    // Disallowed or missing origin: return an error status without CORS headers
+    return res.sendStatus(403);
   }
   
   // For actual requests, only set CORS headers if origin is allowed
