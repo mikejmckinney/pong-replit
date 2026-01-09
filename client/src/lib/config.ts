@@ -23,8 +23,16 @@ export const API_URL = import.meta.env.VITE_API_URL || '';
  * For local development:
  * - Automatically determined from window.location
  */
-export const WS_URL = import.meta.env.VITE_WS_URL || 
-  `${window.location.protocol === "https:" ? "wss:" : "ws:"}//${window.location.host}`;
+function getDefaultWsUrl(): string {
+  // Check if running in browser environment
+  if (typeof window === 'undefined') {
+    return '';
+  }
+  const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+  return `${protocol}//${window.location.host}`;
+}
+
+export const WS_URL = import.meta.env.VITE_WS_URL || getDefaultWsUrl();
 
 /**
  * Helper to get full API URL
