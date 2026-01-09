@@ -99,12 +99,18 @@ Deploy frontend and backend separately for best performance and full functionali
 - Free tier available (with cold starts)
 - Supports multiplayer and server-side leaderboard
 
+**Database (Supabase - Recommended):**
+- PostgreSQL database for persistent leaderboard
+- Free tier: 500MB storage, no expiration
+- See [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for Supabase setup
+- Alternative: In-memory storage (no persistence)
+
 **Benefits:**
 - ✅ All features work (multiplayer, leaderboard, single-player)
 - ✅ Fast edge-delivered frontend via Vercel CDN
 - ✅ WebSocket support for real-time multiplayer
-- ✅ Optional PostgreSQL database on Render
-- ✅ Free tiers available on both platforms
+- ✅ Persistent leaderboard with Supabase (recommended)
+- ✅ Free tiers available on all platforms
 
 ### Vercel Only (Frontend Only)
 Deploy just the frontend to Vercel for single-player functionality. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for instructions.

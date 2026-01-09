@@ -14,4 +14,7 @@ services:
         sync: false
       - key: DATABASE_URL
         sync: false
+        # Recommended: Use Supabase PostgreSQL (free forever, 500MB)
+        # Get connection string from: https://supabase.com
+        # Format: postgresql://postgres:[PASSWORD]@db.xxx.supabase.co:5432/postgres
     healthCheckPath: /api/leaderboard

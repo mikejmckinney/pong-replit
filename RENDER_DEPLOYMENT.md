@@ -7,6 +7,16 @@ This guide explains how to deploy the Neon Pong backend to Render, enabling full
 - Render account ([sign up free](https://render.com))
 - GitHub repository with this code
 - Vercel deployment URL (e.g., `https://pong-replit.vercel.app`)
+- (Optional) Supabase account for database ([setup guide](./SUPABASE_SETUP.md))
+
+## Quick Start
+
+**Recommended stack**: Vercel (frontend) + Render (backend) + Supabase (database)
+
+1. Deploy backend to Render (this guide)
+2. Set up Supabase database ([SUPABASE_SETUP.md](./SUPABASE_SETUP.md))
+3. Configure environment variables
+4. Deploy frontend to Vercel ([VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md))
 
 ## Deployment Options
 
@@ -63,14 +73,70 @@ If you prefer manual setup:
    - Click "Create Web Service"
    - Wait for initial deployment
 
-## Database Setup (Optional)
+## Database Setup (Recommended: Supabase)
 
-The backend works without a database using in-memory storage, but for persistent leaderboard:
+The backend works without a database using in-memory storage, but for persistent leaderboard across restarts, we recommend **Supabase** (PostgreSQL):
+
+### Why Supabase?
+
+- ✅ **Free tier**: 500MB database, no expiration
+- ✅ **Always available**: No 90-day limit like Render's free PostgreSQL
+- ✅ **Better performance**: Optimized PostgreSQL with connection pooling
+- ✅ **Easy setup**: Simple dashboard and automatic backups
+- ✅ **Direct connection**: Works perfectly with Drizzle ORM
+
+### Supabase Setup
+
+1. **Create Supabase Project**
+   - Go to [https://supabase.com](https://supabase.com)
+   - Click "New Project"
+   - Choose organization and set:
+     - **Name**: `neon-pong`
+     - **Database Password**: Generate strong password (save it!)
+     - **Region**: Choose closest to your Render backend region
+   - Click "Create new project" (takes ~2 minutes)
+
+2. **Get Connection String**
+   - Go to Project Settings → Database
+   - Find "Connection string" → "URI"
+   - Copy the connection string (looks like):
+     ```
+     postgresql://postgres:[YOUR-PASSWORD]@db.xxx.supabase.co:5432/postgres
+     ```
+   - **Important**: Replace `[YOUR-PASSWORD]` with your actual database password
+
+3. **Add to Render**
+   - In Render Dashboard → Your web service → Environment
+   - Add environment variable:
+     - **Key**: `DATABASE_URL`
+     - **Value**: Your Supabase connection string
+   - Save changes (triggers redeploy)
+
+4. **Push Database Schema**
+   
+   **Option A: Local push (recommended)**
+   ```bash
+   # In your local repository
+   DATABASE_URL="your-supabase-connection-string" npm run db:push
+   ```
+   
+   **Option B: Let backend auto-create**
+   - Backend will automatically create tables on first run
+   - Check Render logs to verify: "Database tables created successfully"
+
+5. **Verify Setup**
+   - In Supabase Dashboard → Table Editor
+   - You should see `users` and `leaderboard` tables (created by Drizzle)
+   - Test by submitting a score through your app
+
+### Alternative: Render PostgreSQL
+
+If you prefer Render's built-in database:
 
 1. **Create PostgreSQL Database**
    - In Render Dashboard → "New +" → "PostgreSQL"
    - **Name**: `neon-pong-db`
-   - **Plan**: Free (1GB storage, expires after 90 days)
+   - **Plan**: Free (1GB storage, **expires after 90 days**)
    - Click "Create Database"
 
 2. **Connect Database to Web Service**
@@ -80,11 +146,25 @@ The backend works without a database using in-memory storage, but for persistent
      - **Value**: Copy "Internal Database URL" from your PostgreSQL instance
 
 3. **Push Database Schema**
-   - In your local repository:
-     ```bash
-     DATABASE_URL="your-database-url" npm run db:push
-     ```
-   - Or let Drizzle ORM auto-migrate on first run
+   - Same as Supabase option above
+
+**⚠️ Note**: Render's free PostgreSQL expires after 90 days. You'll need to:
+- Migrate to Supabase (recommended)
+- Upgrade to paid PostgreSQL ($7/month)
+- Use in-memory storage only
+
+### Comparison
+
+| Feature | Supabase (Free) | Render PostgreSQL (Free) | In-Memory |
+|---------|----------------|-------------------------|-----------|
+| **Cost** | Free forever | Free for 90 days | Free |
+| **Storage** | 500MB | 1GB | Limited by RAM |
+| **Persistence** | ✅ Permanent | ✅ 90 days | ❌ Lost on restart |
+| **Connection Pooling** | ✅ Built-in | ❌ Not included | N/A |
+| **Backups** | ✅ Automatic | ❌ Manual only | ❌ None |
+| **Best for** | Production | Testing | Development |
+
+**Recommendation**: Use Supabase for production deployments.
 
 ## Frontend Configuration
 
