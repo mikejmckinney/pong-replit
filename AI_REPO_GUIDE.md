@@ -118,8 +118,8 @@ pong-replit/
 
 | File | Purpose |
 |------|---------|
-| `tsconfig.json` | Module: ESNext, strict mode, path aliases (`@`, `@shared`, `@assets`) |
-| `vite.config.ts` | Root: `./client`, output: `dist/public`, Replit plugins (dev only) |
+| `tsconfig.json` | Module: ESNext, strict mode, path aliases (`@`, `@shared`) |
+| `vite.config.ts` | Root: `./client`, output: `dist/public`, `@assets/*` alias, Replit plugins (dev only) |
 | `tailwind.config.ts` | Content: `client/**/*.{tsx,jsx}`, custom retro theme, pixel font |
 | `postcss.config.js` | Tailwind + Autoprefixer |
 | `drizzle.config.ts` | Schema: `shared/schema.ts`, dialect: PostgreSQL (throws if no DB URL for db:push) |

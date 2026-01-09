@@ -192,7 +192,13 @@ npm run build        # Full build (slower, run if check passes)
     └── build.ts           # Production build orchestration
 ```
 
-### Path Aliases (tsconfig.json)
+### Path Aliases
+
+**TypeScript (`tsconfig.json`):**
+- `@/*` → `./client/src/*` (frontend imports)
+- `@shared/*` → `./shared/*` (shared types)
+
+**Vite (`vite.config.ts`):**
 - `@/*` → `./client/src/*` (frontend imports)
 - `@shared/*` → `./shared/*` (shared types)
 - `@assets/*` → `./attached_assets/*` (static assets)
