@@ -34,7 +34,7 @@ The server handles REST API endpoints for leaderboard operations and WebSocket c
 - **Client-side**: localStorage for settings persistence and local leaderboard backup
 
 Database schema includes:
-- `users` table for player accounts
+- `users` table for player accounts (passwords securely hashed using bcrypt)
 - Leaderboard entries with game mode, score, and timestamps
 - Game rooms for multiplayer session management
 
