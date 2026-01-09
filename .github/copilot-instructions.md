@@ -1,5 +1,9 @@
 # Copilot Agent Instructions - Neon Pong
 
+## Required context
+- Always read /AI_REPO_GUIDE.md first and follow it.
+- If AI_REPO_GUIDE.md conflicts with README, prefer the most recently updated source and note the discrepancy.
+
 ## Repository Overview
 
 **Neon Pong** is a full-stack web-based Pong game with a retro arcade synthwave aesthetic. The application is a ~8,500 line TypeScript codebase (76 files) featuring classic Pong mechanics with modern enhancements including multiple game modes, power-ups, local and online multiplayer, and a leaderboard system. Built as a mobile-first experience with touch-friendly controls while supporting desktop play.
