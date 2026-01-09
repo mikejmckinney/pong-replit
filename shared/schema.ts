@@ -6,12 +6,13 @@ import { z } from "zod";
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+  passwordHash: text("password_hash").notNull(),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
+// Schema for creating a user - accepts plain password which will be hashed
+export const insertUserSchema = z.object({
+  username: z.string().min(3).max(50),
+  password: z.string().min(8).max(100),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
