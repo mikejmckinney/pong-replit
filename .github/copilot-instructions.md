@@ -84,7 +84,7 @@ npm run build
 - Server: ~975KB bundled CJS file
 - PostCSS warning about `from` option is EXPECTED and can be ignored
 
-**Build Artifacts:** Always add `dist/` and `node_modules/` to `.gitignore` - they are already excluded.
+**Build Artifacts:** Ensure `dist/` and `node_modules/` are in `.gitignore`. They are already excluded in this project, so no changes should be needed.
 
 ### Production Server
 Start the production server using built artifacts:
