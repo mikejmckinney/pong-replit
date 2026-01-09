@@ -12,6 +12,37 @@ declare module "http" {
   }
 }
 
+// CORS configuration for cross-origin requests (e.g., Vercel frontend to Render backend)
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+  ? process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim())
+  : ['http://localhost:5173', 'http://localhost:5000'];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    // Only allow preflight if origin is explicitly allowed
+    if (origin && allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
+      return res.sendStatus(200);
+    }
+    // Disallowed or missing origin: return an error status without CORS headers
+    return res.sendStatus(403);
+  }
+  
+  // For actual requests, only set CORS headers if origin is allowed
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+  
+  next();
+});
+
 app.use(
   express.json({
     verify: (req, _res, buf) => {

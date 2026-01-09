@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: neon-pong-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: node dist/index.cjs
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+        # Recommended: Use Supabase PostgreSQL (free forever, 500MB)
+        # Get connection string from: https://supabase.com
+        # Format: postgresql://postgres:[PASSWORD]@db.xxx.supabase.co:5432/postgres
+    healthCheckPath: /api/health

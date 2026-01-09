@@ -81,3 +81,46 @@ The game engine (`useGameEngine.ts`) implements:
 - `esbuild`: Server bundling for production
 - `vite`: Frontend bundling with React plugin
 - Replit-specific plugins for development tooling
+
+## Deployment Options
+
+### Vercel + Render (Recommended for Production)
+Deploy frontend and backend separately for best performance and full functionality.
+
+**Frontend (Vercel):**
+- Deploy static frontend to Vercel's global CDN
+- See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for setup
+- Free tier available with excellent performance
+
+**Backend (Render):**
+- Deploy Node.js backend to Render for API and WebSocket support
+- See [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for complete setup
+- Includes CORS configuration for Vercel frontend
+- Free tier available (with cold starts)
+- Supports multiplayer and server-side leaderboard
+
+**Database (Supabase - Recommended):**
+- PostgreSQL database for persistent leaderboard
+- Free tier: 500MB storage, no expiration
+- See [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for Supabase setup
+- Alternative: In-memory storage (no persistence)
+
+**Benefits:**
+- ✅ All features work (multiplayer, leaderboard, single-player)
+- ✅ Fast edge-delivered frontend via Vercel CDN
+- ✅ WebSocket support for real-time multiplayer
+- ✅ Persistent leaderboard with Supabase (recommended)
+- ✅ Free tiers available on all platforms
+
+### Vercel Only (Frontend Only)
+Deploy just the frontend to Vercel for single-player functionality. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for instructions.
+
+**Limitations:**
+- ❌ No multiplayer (requires WebSocket server)
+- ❌ No server-side leaderboard (uses localStorage only)
+- ✅ All single-player modes work perfectly
+
+### Replit (Full-Stack)
+Deploy everything to Replit for quick setup. The `.replit` configuration file is already set up for autoscale deployment.
+
+**Note:** Replit is great for development but Vercel + Render provides better production performance.
