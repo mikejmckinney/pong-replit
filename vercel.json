@@ -1,0 +1,7 @@
+// vercel.json
+{
+  "buildCommand": "npx vite build --outDir dist/public",
+  "outputDirectory": "dist/public",
+  "framework": "vite",
+  "installCommand": "npm install"
+}
